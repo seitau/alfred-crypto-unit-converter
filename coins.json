@@ -1,0 +1,38 @@
+[
+  {
+    "name": "ether",
+    "icon": "icons/ethereum.png",
+    "units": [
+      {
+        "name": "ether",
+        "decimals": 18
+      },
+      {
+        "name": "gwei",
+        "decimals": 9
+      },
+      {
+        "name": "shannon",
+        "decimals": 9
+      },
+      {
+        "name": "wei",
+        "decimals": 0
+      }
+    ]
+  },
+  {
+    "name": "bitcoin",
+    "icon": "icons/bitcoin.png",
+    "units": [
+      {
+        "name": "btc",
+        "decimals": 18
+      },
+      {
+        "name": "satoshi",
+        "decimals": 0
+      }
+    ]
+  }
+]

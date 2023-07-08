@@ -28,42 +28,28 @@ func init() {
 	wf = aw.New()
 }
 
-type coin struct {
-	Name  string
-	Icon  string
-	Units []unit
-}
-
 type unit struct {
-	Name     string
-	Decimals uint64
 }
 
-func readUnits() ([]coin, error) {
-	f, err := os.Open("./coins.json")
+func readUnits() ([]unit, error) {
+	f, err := os.Open("./products.json")
 	if err != nil {
 		return nil, err
 	}
-	b, err := ioutil.ReadAll(f)
+	byt, err := ioutil.ReadAll(f)
 	if err != nil {
 		return nil, err
 	}
-	var coins []coin
-	if err := json.Unmarshal(b, &coins); err != nil {
+	var units []unit
+	if err := json.Unmarshal(byt, &products); err != nil {
 		return nil, err
 	}
-	return coins, nil
+	return products, nil
 }
 
 func run() {
 	wf.Args()
 	flag.Parse()
-
-	coins, err := readUnits()
-	if err != nil {
-		wf.FatalError(err)
-	}
-	log.Println(coins)
 
 	args := wf.Args()
 	if len(args) == 0 {
@@ -74,7 +60,7 @@ func run() {
 		wf.FatalError(fmt.Errorf("keyword not found"))
 	}
 	baseUnit := keyword
-	log.Println(baseUnit)
+	log.Panicln(baseUnit)
 
 	// TODO jsonを読み取ってbase unitからunitsを取得し、baseunit以外に変換したものを表示する
 

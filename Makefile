@@ -4,8 +4,10 @@ WORKFLOW_FILE := build/alfred-crypto-unit-converter.alfredworkflow
 .PHONY: build-workflow
 build-workflow: clean build
 	zip $(WORKFLOW_FILE) \
+	coins.json \
 	info.plist \
 	icon.png \
+	icons \
 	./bin/coverter
 
 .PHONY: clean
