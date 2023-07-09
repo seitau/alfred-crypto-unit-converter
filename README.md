@@ -1,38 +1,13 @@
 <p align="center">
-  <img width=300px src="https://github.com/seitau/alfred-crypto-unit-converter/assets/32608705/bb507f96-b429-4331-9d56-25f4ccfb8091" />
+  <img width=300px src="https://github.com/seitau/alfred-crypto-unit-converter/assets/32608705/70f6ac4c-d3cc-421e-a9ee-b6180be7a9bc" />
 </p>
 
 <p align="center">
- Bilingual Cat is your purrfectly fluffy assistant.
+ Alfred Crypto Unit Converter
 </p>
 
-# Bilingual Cat
+# Usage
 
-## Build
+- Type `ether`, `gwei`, `wei` or `bitcoin`, `satoshi` and decimal value to convert
 
-```sh
-make build
-```
-
-## Docker Build
-
-```sh
-make docker-build
-```
-
-## Run
-
-```sh
-SLACK_BOT_TOKEN={slack bot token} \
-SLACK_WEBHOOK_SIGNING_SECRET={slack signing secret} \
-OPEN_AI_API_TOKEN={open ai api token} \
-go run main.go
-```
-
-Checkout [slack apps page](https://api.slack.com/apps/A057JFH0E5T) to get secret and bot token, and configure webhook endpoint.
-
-- webhook url configuration: https://api.slack.com/apps/A057JFH0E5T/event-subscriptions
-- signing secret: https://api.slack.com/apps/A057JFH0E5T/general
-  - signing secret is used to verify webhook payload sent from slack.
-- bot token: https://api.slack.com/apps/A057JFH0E5T/oauth
-  - bot token begins with `xoxb`
+![screenshot](https://github.com/seitau/alfred-crypto-unit-converter/assets/32608705/a04cee47-8a5f-4075-a1b5-850dafc3c4e5)
