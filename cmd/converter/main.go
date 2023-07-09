@@ -23,10 +23,7 @@ var (
 	query string
 )
 
-// TODO jsonのunit名からinfo.plistを生成するようにする
-// goのtemplateでbuild以下に配置する
-// copy to clipboard
-// send notiifcation
+// TODO generate info.plist from json
 
 func init() {
 	flag.StringVar(&query, "query", "", "search query")
@@ -44,7 +41,7 @@ type coins []*coin
 
 type unit struct {
 	Name     string
-	Decimals int32
+	Decimals string
 }
 
 func (c *coin) findUnitByName(unitName string) *unit {
@@ -79,35 +76,57 @@ func (c *conversionResult) title() string {
 	return fmt.Sprintf("%s %s", c.value, c.unitName)
 }
 
-func convert(coins coins, baseUnitName string, queryValue string) ([]*conversionResult, error) {
-	cs := coins.filterByUnitName(baseUnitName)
-	if len(cs) == 0 {
-		return nil, nil
-	}
+func (cs *coins) convert(fromUnitName string, value string) ([]*conversionResult, error) {
 	results := make([]*conversionResult, 0)
-	for i := range cs {
-		baseUnit := coins[i].findUnitByName(baseUnitName)
-		if baseUnit == nil {
-			continue
+	for _, c := range cs.filterByUnitName(fromUnitName) {
+		res, err := c.convert(fromUnitName, value)
+		if err != nil {
+			return nil, err
 		}
-		for _, unit := range coins[i].Units {
-			if unit.Name == baseUnitName {
-				continue
-			}
-			diff := baseUnit.Decimals - unit.Decimals
-			m := decimal.New(1, diff)
-			d, err := decimal.NewFromString(queryValue)
-			if err != nil {
-				return nil, err
-			}
-			results = append(results, &conversionResult{
-				unitName: unit.Name,
-				icon:     coins[i].Icon,
-				value:    m.Mul(d).String(),
-			})
-		}
+		results = append(results, res...)
 	}
 	return results, nil
+}
+
+func (c *coin) convert(fromUnitName string, value string) ([]*conversionResult, error) {
+	fromUnit := c.findUnitByName(fromUnitName)
+	if fromUnit == nil {
+		return nil, nil
+	}
+
+	results := make([]*conversionResult, 0)
+	for _, unit := range c.Units {
+		if unit.Name == fromUnitName {
+			continue
+		}
+		converted, err := convert(fromUnit, unit, value)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, &conversionResult{
+			unitName: unit.Name,
+			icon:     c.Icon,
+			value:    converted,
+		})
+	}
+	return results, nil
+}
+
+func convert(fromUnit, toUnit *unit, value string) (string, error) {
+	val, err := decimal.NewFromString(value)
+	if err != nil {
+		return "", err
+	}
+	fromDecimal, err := decimal.NewFromString(fromUnit.Decimals)
+	if err != nil {
+		return "", err
+	}
+	toDecimal, err := decimal.NewFromString(toUnit.Decimals)
+	if err != nil {
+		return "", err
+	}
+	propotion := fromDecimal.Div(toDecimal)
+	return val.Mul(propotion).String(), nil
 }
 
 func readCoins() (coins, error) {
@@ -148,21 +167,25 @@ func run() {
 	if !ok {
 		wf.FatalError(fmt.Errorf("keyword not found"))
 	}
-	baseUnitName := keyword
+	fromUnitName := keyword
 
-	results, err := convert(coins, baseUnitName, queryValue)
+	log.Println("fromUnitName:", fromUnitName)
+	results, err := coins.convert(fromUnitName, queryValue)
 	if err != nil {
 		wf.FatalError(err)
 	}
 
 	for _, result := range results {
-		item := wf.NewItem(result.title())
-		item.Icon(&aw.Icon{
-			Value: result.icon,
-			Type:  aw.IconTypeImage,
-		})
-		item.Title(result.title())
-		item.Subtitle(result.unitName)
+		wf.NewItem(result.title()).
+			Icon(&aw.Icon{
+				Value: result.icon,
+				Type:  aw.IconTypeImage,
+			}).
+			Title(result.title()).
+			Subtitle(result.unitName).
+			UID(result.icon + result.unitName).
+			Valid(true).
+			Arg(result.value)
 	}
 
 	wf.SendFeedback()

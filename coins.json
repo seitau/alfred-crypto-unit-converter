@@ -5,19 +5,19 @@
     "units": [
       {
         "name": "ether",
-        "decimals": 18
+        "decimals": "1"
       },
       {
         "name": "gwei",
-        "decimals": 9
+        "decimals": "0.000000001"
       },
       {
         "name": "shannon",
-        "decimals": 9
+        "decimals": "0.000000001"
       },
       {
         "name": "wei",
-        "decimals": 0
+        "decimals": "0.0000000000000000001"
       }
     ]
   },
@@ -26,12 +26,32 @@
     "icon": "icons/bitcoin.png",
     "units": [
       {
-        "name": "btc",
-        "decimals": 18
+        "name": "bitcoin",
+        "decimals": "1"
+      },
+      {
+        "name": "bitcent",
+        "decimals": "0.01"
+      },
+      {
+        "name": "millibit",
+        "decimals": "0.001"
+      },
+      {
+        "name": "bit",
+        "decimals": "0.000001"
+      },
+      {
+        "name": "finney",
+        "decimals": "0.0000001"
       },
       {
         "name": "satoshi",
-        "decimals": 0
+        "decimals": "0.00000001"
+      },
+      {
+        "name": "millisatoshi",
+        "decimals": "0.00000000001"
       }
     ]
   }

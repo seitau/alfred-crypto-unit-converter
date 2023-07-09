@@ -7,9 +7,33 @@
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
-	<dict/>
+	<dict>
+		<key>C64BA16D-BADD-457A-A775-26012EFDAE3B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B0A65C02-B7A9-4C1B-877A-56ED0AAFE56D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F12BD0A4-8D29-4671-A514-FE94C08D7FD3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
 	<key>createdby</key>
-	<string>seitau</string>
+	<string>Seita Uchimura</string>
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
@@ -18,6 +42,27 @@
 	<string>Crypto Unit Converter</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query} was copied to clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B0A65C02-B7A9-4C1B-877A-56ED0AAFE56D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -34,7 +79,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>ether||wei||gwei||btc</string>
+				<string>ether||gwei||shannon||wei||bitcoin||bitcent||bit||finney||millibit||satoshi||millisatoshi</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -69,17 +114,50 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F12BD0A4-8D29-4671-A514-FE94C08D7FD3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>B0A65C02-B7A9-4C1B-877A-56ED0AAFE56D</key>
+		<dict>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>155</real>
+		</dict>
 		<key>C64BA16D-BADD-457A-A775-26012EFDAE3B</key>
 		<dict>
 			<key>xpos</key>
 			<real>155</real>
 			<key>ypos</key>
 			<real>245</real>
+		</dict>
+		<key>F12BD0A4-8D29-4671-A514-FE94C08D7FD3</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
