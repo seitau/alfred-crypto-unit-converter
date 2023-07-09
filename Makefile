@@ -7,8 +7,8 @@ build-workflow: clean build
 	coins.json \
 	info.plist \
 	icon.png \
-	icons \
-	./bin/coverter
+	icons/* \
+	bin/converter
 
 .PHONY: clean
 clean:
