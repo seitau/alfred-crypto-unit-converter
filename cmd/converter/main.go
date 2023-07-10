@@ -26,6 +26,7 @@ var (
 // TODO generate info.plist from json
 
 func init() {
+	decimal.DivisionPrecision = 18
 	flag.StringVar(&query, "query", "", "search query")
 
 	wf = aw.New()
